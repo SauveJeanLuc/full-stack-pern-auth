@@ -8,4 +8,14 @@ exports.getUsers = async (req, res) => {
     }catch(error){
         console.log(error.message)
     }
-}  
+} 
+
+exports.register = async (req,res) => {
+    try{
+        console.log('validation passed')
+        // const {rows} = await db.query('insert into users ($1, $2)', [req.email, req.password])
+        res.send(rows);
+    }catch (error) {
+        console.log(error.message)
+    }
+}

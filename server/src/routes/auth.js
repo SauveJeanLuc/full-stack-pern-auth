@@ -1,16 +1,12 @@
 const {Router} = require('express');
-const { getUsers } = require('../controllers/auth');
-const router = Router()
+const { getUsers, register } = require('../controllers/auth');
+const { validatorMiddleware } = require('../middlewares/auth-middleware');
+const router = Router();
 
-router.get('/', (req,res) => {
-    return res.send('This works')
-});
-
-router.get('/determine', (req, res) =>{
-    return res.send('Ambiguous')
-})
+const {registerValidation} = require('../validators/auth')
 
 router.get('/users', getUsers)
+router.post('/register', registerValidation, validatorMiddleware, register)
 
 
 module.exports = router

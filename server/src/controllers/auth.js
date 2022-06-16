@@ -64,3 +64,17 @@ exports.login = async (req,res) => {
         })
     }
 }
+
+
+exports.protected = async (req, res) => {
+    try{
+       const {rows} = await db.query('select user_id, email, created_at from users');
+
+       return res.status(200).json({
+            info: 'protected info'
+       })
+
+    }catch(error){
+        console.log(error.message)
+    }
+} 

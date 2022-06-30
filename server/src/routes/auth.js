@@ -11,7 +11,7 @@ router.get('/users', getUsers)
 router.get('/protected', userAuth ,protected)
 router.post('/register', registerValidation, validatorMiddleware, register)
 router.post('/login', loginValidation, validatorMiddleware, login)
-router.get('/logout', userAuth, logout)
+router.get('/logout', logout)
 
 
 module.exports = router;

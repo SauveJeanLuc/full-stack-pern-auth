@@ -51,8 +51,6 @@ exports.login = async (req,res) => {
 
         const token = await sign(payload, SECRET);
 
-        console.log(token)
-
         return res.status(200).cookie('token', token, {httpOnly: true}).json({
             success: true,
             message: 'You have logged in successfully',
@@ -65,10 +63,8 @@ exports.login = async (req,res) => {
     }
 }
 
-
 exports.protected = async (req, res) => {
     try{
-       const {rows} = await db.query('select user_id, email, created_at from users');
 
        return res.status(200).json({
             info: 'protected info'
@@ -78,3 +74,19 @@ exports.protected = async (req, res) => {
         console.log(error.message)
     }
 } 
+
+exports.logout = async (req, res) => {
+    try {
+        console.log('going to log out');
+        
+        return res.status(200).clearCookie('token', {httpOnly: true}).json({
+            success: true,
+            message: 'Logged out successfully',
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message
+        })        
+    }
+}
